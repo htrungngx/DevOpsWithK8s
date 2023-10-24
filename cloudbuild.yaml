@@ -4,14 +4,14 @@ steps:
   entrypoint: 'bash'
   args: [
    '-c',
-   'docker pull todo-image:latest || exit 0'
+   'docker pull gcr.io/htrung-cicd-project/todo-image:latest || exit 0'
   ]
 # Step 2
 - name: gcr.io/cloud-builders/docker
   args: [
    'build',
    '-t',
-   'todo-image:latest',
+   'gcr.io/htrung-cicd-project/todo-image:latest',
    '.'
   ]
 # Step 3
@@ -27,12 +27,12 @@ steps:
    'image',
    'deployment',
    'todo',
-   'todo=todo-image:latest'
+   'todo=gcr.io/htrung-ci-cd/todo-image:latest'
   ]
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-d'
   - 'CLOUDSDK_CONTAINER_CLUSTER=gke-my-app-node'
   # Push the image to Google Container Registry with the latest tag
 images: [
-   'todo-image:latest'
+   'gcr.io/htrung-cicd-project/todo-image:latest'
   ]
