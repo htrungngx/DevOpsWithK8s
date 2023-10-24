@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: todo
+  name: todo-image
 spec:
   selector:
-     run: todo
+     run: todo-image
   ports:
   - protocol: TCP
     port: 80

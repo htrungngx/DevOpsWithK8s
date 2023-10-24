@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    run: todo
-  name: todo
+    run: todo-image
+  name: todo-image
 spec:
   replicas: 2
   selector:
     matchLabels:
-      run: todo
+      run: todo-image
   template:
     metadata:
       labels:
-        run: todo
+        run: todo-image
     spec:
       containers:
-      - image: todo-image:latest 
-        name: todo
+      - image: gcr.io/htrung-cicd-project/todo-image:latest 
+        name: todo-image
         ports:
         - containerPort: 8080
