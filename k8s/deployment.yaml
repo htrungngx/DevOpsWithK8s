@@ -18,4 +18,4 @@ spec:
       - image: gcr.io/htrung-cicd-project/todo-image:latest 
         name: todo-image
         ports:
-        - containerPort: 8080
+        - containerPort: 3000
