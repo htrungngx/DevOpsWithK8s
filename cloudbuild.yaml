@@ -1,0 +1,17 @@
+steps:
+# Step 1
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: [
+   '-c',
+   'docker pull todo:latest || exit 0'
+  ]
+# Step 2
+- name: gcr.io/cloud-builders/docker
+  args: [
+   'build',
+   '-t',
+   'todo:latest',
+   '.'
+  ]
+
