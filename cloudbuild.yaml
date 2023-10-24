@@ -4,14 +4,35 @@ steps:
   entrypoint: 'bash'
   args: [
    '-c',
-   'docker pull todo:latest || exit 0'
+   'docker pull todo-image:latest || exit 0'
   ]
 # Step 2
 - name: gcr.io/cloud-builders/docker
   args: [
    'build',
    '-t',
-   'todo:latest',
+   'todo-image:latest',
    '.'
   ]
-
+# Step 3
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'k8s/']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-d'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=gke-my-app-node'
+# Step 4
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: [
+   'set',
+   'image',
+   'deployment',
+   'todo',
+   'todo=todo-image:latest'
+  ]
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-d'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=gke-my-app-node'
+  # Push the image to Google Container Registry with the latest tag
+images: [
+   'todo-image:latest'
+  ]
