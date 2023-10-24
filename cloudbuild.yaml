@@ -26,8 +26,8 @@ steps:
    'set',
    'image',
    'deployment',
-   'todo',
-   'todo=gcr.io/htrung-ci-cd/todo-image:latest'
+   'todo-image',
+   'todo-image=gcr.io/htrung-ci-cd/todo-image:latest'
   ]
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-d'
