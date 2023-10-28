@@ -32,8 +32,8 @@ CMD [ "npm", "start" ]
 
 ```
 
-### CI/CD steps
-``` Cloudbuild.yaml 
+### CI/CD steps (cloudbuild.yaml)
+```
 steps:
 # Step 1
 - name: 'gcr.io/cloud-builders/docker'
