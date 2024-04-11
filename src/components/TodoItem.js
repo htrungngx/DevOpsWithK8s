@@ -73,6 +73,7 @@ function TodoItem({ todo }) {
             onKeyDown={() => handleDelete()}
             tabIndex={0}
             role="button"
+            aria-label="Delete"
           >
             <MdDelete />
           </div>
@@ -82,6 +83,7 @@ function TodoItem({ todo }) {
             onKeyDown={() => handleUpdate()}
             tabIndex={0}
             role="button"
+            aria-label="Edit"
           >
             <MdEdit />
           </div>
