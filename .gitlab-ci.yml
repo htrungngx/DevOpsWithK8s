@@ -8,9 +8,6 @@ stages:
   - image scan
   - deploy
 
-cache: 
-  path: 
-    - node_modules/
 build: 
   stage: build
   script:
