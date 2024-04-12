@@ -8,13 +8,6 @@ stages:
   - image scan
   - deploy
 
-build: 
-  stage: build
-  script:
-    - echo "Start building"
-    - npm install .
-    - echo "Build successfully!"
-
 docker-build:
   stage: dockerize
   image:
