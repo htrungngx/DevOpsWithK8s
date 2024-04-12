@@ -16,7 +16,7 @@ docker-build:
     - name: docker:dind 
       alias: thedockerhost 
   before_script:
-    - docker login -u $CI_REGISTRY_USER ----password-stdin $CI_REGISTRY_PASSWORD
+    - docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY_PASSWORD
   script:
     - docker build -t "$BUILD_DOCKER_IMAGE" .
     - docker push "$BUILD_DOCKER_IMAGE:$CI_COMMIT_SHA"
