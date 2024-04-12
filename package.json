@@ -3,17 +3,17 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@fontsource/poppins": "^4.5.0",
-		"@reduxjs/toolkit": "^1.7.1",
-		"date-fns": "^2.28.0",
-		"framer-motion": "^5.5.1",
+		"@fontsource/poppins": "^4.5.10",
+		"@reduxjs/toolkit": "^1.9.7",
+		"date-fns": "^2.30.0",
+		"framer-motion": "^5.6.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
-		"react-hot-toast": "^2.2.0",
-		"react-icons": "^4.3.1",
-		"react-redux": "^7.2.6",
+		"react-hot-toast": "^2.4.1",
+		"react-icons": "^4.12.0",
+		"react-redux": "^7.2.9",
 		"react-scripts": "^5.0.1",
-		"sass": "^1.74.1",
+		"sass": "^1.75.0",
 		"uuid": "^9.0.1"
 	},
 	"scripts": {
@@ -50,14 +50,14 @@
 	},
 	"devDependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-		"eslint": "^8.52.0",
+		"eslint": "^8.57.0",
 		"eslint-config-airbnb": "^19.0.4",
-		"eslint-config-wesbos": "^3.0.2",
-		"eslint-plugin-import": "^2.29.0",
-		"eslint-plugin-jsx-a11y": "^6.7.1",
+		"eslint-config-wesbos": "^3.2.3",
+		"eslint-plugin-import": "^2.29.1",
+		"eslint-plugin-jsx-a11y": "^6.8.0",
 		"eslint-plugin-prettier": "^4.2.1",
-		"eslint-plugin-react": "^7.33.2",
+		"eslint-plugin-react": "^7.34.1",
 		"eslint-plugin-react-hooks": "^4.6.0",
-		"prettier": "^2.8.0"
+		"prettier": "^2.8.8"
 	}
 }
