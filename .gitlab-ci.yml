@@ -1,0 +1,32 @@
+image: node:alpine 
+variables:
+  BUILD_DOCKER_IMAGE: "htrungtodo/docker"
+stages:
+  - build
+  - code scan
+  - dockerize
+  - image scan
+  - deploy
+
+cache: 
+  path: 
+    - node_modules/
+build: 
+  stage: build
+  script:
+    - echo "Start building"
+    - npm install .
+    - echo "Build successfully!"
+
+docker-build:
+  stage: dockerize
+  image:
+    name: docker:stable
+  services: 
+    - name: docker:dind 
+      alias: thedockerhost 
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+  script:
+    - docker build -t "$BUILD_DOCKER_IMAGE" .
+    - docker push "$BUILD_DOCKER_IMAGE":latest
