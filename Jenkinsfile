@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         jdk 'jdk20'
+        node 'nodejs'
     }
 
     stages {
@@ -25,6 +26,13 @@ pipeline {
         }
     }
 }
+
+
+
+
+
+
+
         /*//Deploy to Dev Environment
         stage('Deploy to DevEnv') {
             steps {
