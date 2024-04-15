@@ -21,8 +21,10 @@ pipeline {
                 withSonarQubeEnv('sonar-scanner') {
                     sh """
                         ${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectName=Todo-testing \
                         -Dsonar.projectKey=Todo-testing \
-                        -Dsonar.sources=.
+                        -Dsonar.sources=. \
+                        -Dsonar.scm.disabled=True
                     """
                 }
             }
