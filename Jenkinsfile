@@ -23,6 +23,8 @@ pipeline {
                 }
             }
         }
+    }
+}
         /*//Deploy to Dev Environment
         stage('Deploy to DevEnv') {
             steps {
@@ -35,6 +37,5 @@ pipeline {
         }
     //Deploy to production server
     }*/
-}
-}
+
 
