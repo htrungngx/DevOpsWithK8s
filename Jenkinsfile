@@ -13,20 +13,17 @@ pipeline {
             }
         }
 
-       /* //Build code with Docker and Push to Registry
+        //Build code with Docker and Push to Registry
         stage('Build Image') {
             steps {
-                withDockerRegistry(
-                    credentialsId: 'docker-hub',
-                    url: 'https://index.docker.io/v1/'
-                ) {
-                    sh 'docker pull dckb9xz/app:latest || exit 0'
-                    sh 'docker build -t dckb9xz/app .'
-                    sh 'docker push dckb9xz/app'
+                {
+                    sh 'docker pull dckb9xz/todo:latest || exit 0'
+                    sh 'docker build -t dckb9xz/todo .'
+                    sh 'docker push dckb9xz/todo'
                 }
             }
         }
-        //Deploy to Dev Environment
+        /*//Deploy to Dev Environment
         stage('Deploy to DevEnv') {
             steps {
                 echo 'Deploying and Cleaning'

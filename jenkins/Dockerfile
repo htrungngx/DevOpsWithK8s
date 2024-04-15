@@ -8,5 +8,4 @@ RUN add-apt-repository \
    $(lsb_release -cs) \
    stable"
 RUN apt-get update  -qq \
-    && apt-get -y install docker 
-
+    && apt-get -y install docker
