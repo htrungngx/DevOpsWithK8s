@@ -1,6 +1,7 @@
 image: node:alpine 
 variables:
   BUILD_DOCKER_IMAGE: "htrungtodo/docker"
+  BUILD_DOCKER_TAG: "v1"
 stages:
   - build
   - code scan
@@ -19,4 +20,5 @@ docker-build:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
   script:
     - docker build -t "$BUILD_DOCKER_IMAGE" .
-    - docker push "$BUILD_DOCKER_IMAGE:$CI_COMMIT_SHA"
+    - docker tag "$BUILD_DOCKER_IMAGE" "$BUILD_DOCKER_IMAGE":latest
+    - docker push "$BUILD_DOCKER_IMAGE":latest 
