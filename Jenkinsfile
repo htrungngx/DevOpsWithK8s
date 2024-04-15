@@ -16,11 +16,9 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    docker.withRegistry('https://your.registry.url', 'credentials-id') {
-                        sh 'docker pull dckb9xz/todo:latest || exit 0'
-                        sh 'docker build -t dckb9xz/todo .'
-                        sh 'docker push dckb9xz/todo'
-                    }
+                    sh 'docker pull dckb9xz/todo:latest || exit 0'
+                    sh 'docker build -t dckb9xz/todo .'
+                    sh 'docker push dckb9xz/todo'
                 }
             }
         }
