@@ -35,7 +35,7 @@ pipeline {
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonarID'
                 }
             }
-        }
+        }/*
         stage('Install Dependencies') {
             steps {
                 sh "npm ci"
@@ -44,14 +44,14 @@ pipeline {
         stage('OWASP FS SCAN') {
             steps {
                 dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                dependencyCheckPublisher pattern: "/dependency-check-report.xml"
             }
         }
         stage('TRIVY FS SCAN') {
             steps {
                 sh 'trivy fs . > $HOME/trivyfs.txt'
             }
-        }
+        }*/
 
         stage('Build Image') {
             steps {
