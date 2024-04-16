@@ -32,10 +32,27 @@ pipeline {
         stage("Quality gate"){
            steps {
                 script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonarID' 
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonarID'
                 }
-            } 
+            }
         }
+        stage('Install Dependencies') {
+            steps {
+                sh "npm install"
+            }
+        }
+        stage('OWASP FS SCAN') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+        stage('TRIVY FS SCAN') {
+            steps {
+                sh 'trivy fs . > $HOME/trivyfs.txt'
+            }
+        }
+
         stage('Build Image') {
             steps {
                 script {
@@ -47,9 +64,7 @@ pipeline {
         }
         stage('Scan Image') {
             steps {
-                script {
-                    sh 'trivy image dckb9xz/todo:latest > $HOME/trivy.txt'
-                }
+                sh 'trivy image dckb9xz/todo:latest > $HOME/trivy.txt'
             }
         }
     }
