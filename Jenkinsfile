@@ -64,9 +64,8 @@ pipeline {
         }
         stage('Scan Image') {
             steps {
-                sh 'wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb'
-                sh 'sudo dpkg -i trivy_0.18.3_Linux-64bit.deb'
-                sh 'trivy image dckb9xz/todo:latest > $HOME/trivy.txt'
+                sh 'docker pull aquasec/trivy:0.18.3'
+                sh 'docker run --rm -v $HOME/.cache/ aquasec/trivy:0.18.3 dckb9xz/todo:latest'
             }
         }
     }
