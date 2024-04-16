@@ -28,8 +28,14 @@ pipeline {
                     """
                 }
             }
+        }
+        stage("Quality gate"){
+           steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonarID' 
                 }
-
+            } 
+        }
         stage('Build Image') {
             steps {
                 script {
@@ -42,7 +48,7 @@ pipeline {
         stage('Scan Image') {
             steps {
                 script {
-                    sh 'trivy image dckb9xz/todo > $HOME/trivy.txt'
+                    sh 'trivy image dckb9xz/tod:latest > $HOME/trivy.txt'
                 }
             }
         }
