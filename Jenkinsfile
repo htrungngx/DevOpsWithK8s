@@ -13,7 +13,7 @@ pipeline {
             }
         }
 
-        stage('Code Analysis') {
+        /*stage('Code Analysis') {
             environment {
                 scannerHome = tool 'sonar-scanner'
             }
@@ -35,7 +35,7 @@ pipeline {
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonarID'
                 }
             }
-        }/*
+        }
         stage('Install Dependencies') {
             steps {
                 sh "npm ci"
@@ -62,11 +62,11 @@ pipeline {
                 }
             }
         }
-        stage('Scan Image') {
+        /*stage('Scan Image') {
             steps {
                 sh 'docker pull aquasec/trivy:0.18.3'
                 sh 'docker run --rm -v $HOME/.cache/ aquasec/trivy:0.18.3 dckb9xz/todo:latest'
             }
-        }
+        }*/
     }
 }
