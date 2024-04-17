@@ -1,7 +1,7 @@
 FROM node:alpine AS base
 WORKDIR /app
-COPY package.json ./
-RUN npm install . 
+COPY package*.json ./
+RUN npm install 
 COPY . .
 
 FROM node:alpine as production 
