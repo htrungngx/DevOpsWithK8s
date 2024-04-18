@@ -36,7 +36,7 @@ pipeline {
                 }
            }
         }
-        stage('Install Dependencies') {
+        /*stage('Install Dependencies') {
             steps {
                 sh 'npm install .'
             }
@@ -51,7 +51,7 @@ pipeline {
             steps {
                 sh 'trivy fs . > $HOME/trivyfs.txt'
             }
-        }
+        }*/
 
         stage('Build Image') {
             steps {
