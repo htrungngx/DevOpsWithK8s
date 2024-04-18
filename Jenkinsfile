@@ -56,9 +56,10 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    sh 'docker pull dckb9xz/todo:latest || exit 0'
-                    sh 'docker build -t dckb9xz/todo .'
-                    sh 'docker push dckb9xz/todo'
+                    DOCKER_IMAGE="gitops-demo"
+                    sh 'docker pull dckb9xz/${DOCKER_IMAGE} || exit 0'
+                    sh 'docker build -t dckb9xz/${DOCKER_IMAGE} .'
+                    sh 'docker push dckb9xz/${DOCKER_IMAGE}'
                 }
             }
         }
