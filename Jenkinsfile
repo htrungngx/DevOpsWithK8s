@@ -57,9 +57,9 @@ pipeline {
             steps {
                 script {
                     DOCKER_IMAGE="gitops-demo"
-                    sh 'docker pull dckb9xz/${DOCKER_IMAGE} || exit 0'
-                    sh 'docker build -t dckb9xz/${DOCKER_IMAGE} .'
-                    sh 'docker push dckb9xz/${DOCKER_IMAGE}'
+                    sh 'docker pull dckb9xz/$DOCKER_IMAGE || exit 0'
+                    sh 'docker build -t dckb9xz/$DOCKER_IMAGE .'
+                    sh 'docker push dckb9xz/$DOCKER_IMAGE'
                 }
             }
         }
