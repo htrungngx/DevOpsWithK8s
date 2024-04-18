@@ -13,7 +13,7 @@ pipeline {
             }
         }
 
-        /*stage('Code Analysis') {
+        stage('Code Analysis') {
             environment {
                 scannerHome = tool 'sonar-scanner'
             }
@@ -34,24 +34,29 @@ pipeline {
                 script {
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonarID'
                 }
-            }
+           }
         }
         stage('Install Dependencies') {
             steps {
                 sh "npm ci"
             }
         }
-        stage('OWASP FS SCAN') {
+        stage('OWASP Dependency-Check Vulnerabilities') {
             steps {
-                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
-                dependencyCheckPublisher pattern: "/dependency-check-report.xml"
+                dependencyCheck additionalArguments: '''
+                            -o './'
+                            -s './'
+                            -f 'ALL'
+                            --prettyPrint''', odcInstallation: 'dp-check'
+
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
         }
         stage('TRIVY FS SCAN') {
             steps {
                 sh 'trivy fs . > $HOME/trivyfs.txt'
             }
-        }*/
+        }
 
         stage('Build Image') {
             steps {
@@ -62,12 +67,11 @@ pipeline {
                 }
             }
         }
-        /*stage('Scan Image') {
+        stage('Scan Image') {
             steps {
-                sh 'docker pull aquasec/trivy:0.18.3'
-                sh 'docker run --rm -v $HOME/.cache/ aquasec/trivy:0.18.3 dckb9xz/todo:latest'
+                sh 'trivy image dckb9xz/todo > $HOME/trivyimage.txt'
             }
-        }*/
+        }
 
         stage('Trigger Downstream Job') {
             steps {
