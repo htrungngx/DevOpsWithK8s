@@ -68,8 +68,7 @@ pipeline {
                     docker pull aquasec/trivy
                     docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
                         -v $HOME/Library/Caches:/root/.cache/ \
-                        -v "$PWD/.trivyignore":/.trivyignore:ro \
-                        aquasec/trivy --ignorefile /.trivyignore dckb9xz/todo:latest
+                        aquasec/trivy dckb9xz/todo:latest
                 '''
             }
         }
