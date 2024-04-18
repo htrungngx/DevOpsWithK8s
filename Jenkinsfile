@@ -68,5 +68,13 @@ pipeline {
                 sh 'docker run --rm -v $HOME/.cache/ aquasec/trivy:0.18.3 dckb9xz/todo:latest'
             }
         }*/
+
+        stage('Trigger Downstream Job') {
+            steps {
+                build(job: 'update-manifest-github', parameters: [
+                    string(name: 'DOCKTERTAG', value: 'latest')
+                ])
+            }
+        }
     }
 }
