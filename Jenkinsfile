@@ -64,7 +64,7 @@ pipeline {
         }
         stage('Scan Image') {
             steps {
-                sh 'trivy image dckb9xz/todo > $HOME/trivyimage.txt'
+                sh 'trivy dckb9xz/todo:latest > $HOME/trivyimage.txt'
             }
         }
 
