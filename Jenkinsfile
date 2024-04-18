@@ -38,20 +38,20 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh "npm install"
+                sh "npm install ."
             }
         }
-        stage('OWASP Dependency-Check Vulnerabilities') {
+        stage ('OWASP Dependency-Check Vulnerabilities') {
             steps {
-                dependencyCheck additionalArguments: '''
-                            -o './'
-                            -s './'
-                            -f 'ALL'
-                            --prettyPrint''', odcInstallation: 'dp-check'
+                dependencyCheck additionalArguments: ''' 
+                    -o "./" 
+                    -s "./"
+                    -f "ALL" 
+                    --prettyPrint''', odcInstallation: 'dp-check'
 
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
-        }
+        }     
         stage('TRIVY FS SCAN') {
             steps {
                 sh 'trivy fs . > $HOME/trivyfs.txt'
