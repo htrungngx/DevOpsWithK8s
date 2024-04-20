@@ -9,3 +9,5 @@ RUN add-apt-repository \
    stable"
 RUN apt-get update  -qq \
     && apt-get -y install docker
+
+RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin

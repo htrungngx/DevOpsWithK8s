@@ -9,6 +9,7 @@ services:
     volumes:
       - jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/local/bin/trivy:/usr/local/bin/trivy
   proxy:
     restart: unless-stopped
     image: nginx

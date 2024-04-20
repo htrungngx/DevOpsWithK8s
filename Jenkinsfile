@@ -65,10 +65,7 @@ pipeline {
         stage('Scan Image') {
             steps {
                 sh '''
-                    docker pull aquasec/trivy
-                    docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
-                        -v $HOME/Library/Caches:/root/.cache/ \
-                        aquasec/trivy dckb9xz/todo:latest
+                    trivy image --format template --template "@contrib/html.tpl" -o test_result.html dckb9xz/todo:latest
                 '''
             }
         }
