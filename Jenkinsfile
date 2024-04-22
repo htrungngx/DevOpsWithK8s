@@ -65,7 +65,7 @@ pipeline {
         stage('Scan Image') {
             steps {
                 sh '''
-                    trivy image --format template --template "@contrib/html.tpl" -o test_result.html dckb9xz/todo:latest
+                    trivy image --format template --template "/usr/share/html.tpl" -o test_result.html dckb9xz/todo:latest
                 '''
             }
         }
