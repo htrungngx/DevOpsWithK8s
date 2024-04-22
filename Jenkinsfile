@@ -9,7 +9,7 @@ pipeline {
         stage('Clone') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/htrungngx/GCP-Devops.git'
+                    url: """${GCP_DEVOPS}"""
             }
         }
 
@@ -56,24 +56,24 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    sh 'docker pull dckb9xz/todo || exit 0'
-                    sh 'docker build -t dckb9xz/todo .'
-                    sh 'docker push dckb9xz/todo'
+                    sh """docker pull ${DOCKER_NAME}/${DOCKER_IMAGE}:latest || exit 0"""
+                    sh """docker build -t ${DOCKER_NAME}/${DOCKER_IMAGE}:${env.BUILD_NUMBER} ."""
+                    sh """docker push ${DOCKER_NAME}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}"""
                 }
             }
         }
         stage('Scan Image') {
             steps {
-                sh '''
-                    trivy image --format template --template "/usr/share/html.tpl" -o test_result.html dckb9xz/todo:latest
-                '''
+                sh """
+                    trivy image --format template --template "${PATH}/html.tpl" -o test_result.html ${DOCKER_NAME}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}
+                """
             }
         }
 
         stage('Trigger Downstream Job') {
             steps {
                 build(job: 'update-manifest-github', parameters: [
-                    string(name: 'DOCKTERTAG', value: 'latest')
+                    string(name: 'DOCKTERTAG', value: env.BUILD_NUMBER)
                 ])
             }
         }
