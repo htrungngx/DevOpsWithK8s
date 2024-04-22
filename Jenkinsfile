@@ -56,16 +56,18 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    sh """docker pull ${DOCKER_NAME}/${DOCKER_IMAGE}:latest || exit 0"""
-                    sh """docker build -t ${DOCKER_NAME}/${DOCKER_IMAGE}:${env.BUILD_NUMBER} ."""
-                    sh """docker push ${DOCKER_NAME}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}"""
+                    sh """
+                        docker pull ${DOCKER_NAME}/${DOCKER_IMAGE}:latest || exit 0
+                        docker build -t ${DOCKER_NAME}/${DOCKER_IMAGE} .
+                        docker tag  ${DOCKER_NAME}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}
+                        docker push ${DOCKER_NAME}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}"""
                 }
             }
         }
         stage('Scan Image') {
             steps {
                 sh """
-                    trivy image --format template --template "${PATH}/html.tpl" -o test_result.html ${DOCKER_NAME}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}
+                    trivy image --format template --template "/usr/share/html.tpl" -o test_result.html ${DOCKER_NAME}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}
                 """
             }
         }
