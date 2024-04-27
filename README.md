@@ -2,8 +2,8 @@
 
 ## Clone 
 ```
-git pull https://github.com/htrungngx/GCP-Devops.git
-cd GCP-Devops
+git pull https://github.com/htrungngx/DevOpsWithK8s.git
+cd DevOpsWithK8s
 ```
 ## Run on local
 
