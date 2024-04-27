@@ -116,3 +116,53 @@ Configuration > Pipeline > Specify repo URL above, branch 'main', Scriptpath 'Je
 
 ## Setup ArgoCD 
 
+Login via browser "http://master-node-ip:8080"
+>admin
+>Password (follow instructions)
+
+![example](images/ArgoCD.png)
+
+Create new app
+
+- Application Name: demogitops
+- Project Name: default
+- Sync: Automatic
+- Repo: [Deployment_repo](https://github.com/htrungngx/ArgoCD_Deployments)
+- Target Revision: HEAD
+- Path: .
+- Namespace: deploy-argocd
+
+Developer pushes code to run job 1 (pull, build, scan, containerized, push, scan), after running job 1 will trigger job 2 (by parameter) to deploy k8s by pulling newest image
+
+![example](images/ArgoCD2.png)
+
+# Results
+
+Todo-list on K8s 
+>http://master-node:3000
+
+![example](images/Jenkins-job1.png)
+![example](images/Jenkins-job2.png)
+![example](images/Todo.png)
+
+
+# Troubleshooting
+
+1. Can not access to webapp after deploying to k8s
+
+Check exposed port
+>kubectl get svc -n NAMESPACE
+
+Forward port publicly 
+>sudo -E  kubectl port-forward --address 0.0.0.0 service/htrung-svc -n deploy-argocd 
+
+2. Docker/trivy can not run inside Jenkins
+
+Mount Docker/Trivy into Jenkins's container. Add these into docker-compose for Jenkins
+
+```
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /usr/local/bin/trivy:/usr/local/bin/trivy
+```
+
+continue...
